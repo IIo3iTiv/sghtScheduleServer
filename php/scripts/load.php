@@ -12,7 +12,7 @@ $link = mysqli_connect($host, $user, $password, $db_name)  or die("Error connect
 # ../../files/data.json
 
 # Читаем data.json
-$string = file_get_contents('../../files/data.json');
+$string = file_get_contents('../../../files/data.json');
 
 # Превращаем в объект
 $data = json_decode($string);
@@ -49,7 +49,10 @@ switch (json_last_error()) {
 }
 
 # Если ошибки есть, то выводим их
-if($data_error != '') echo $data_error;
+if($data_error != '') {
+  echo $data_error;
+  return;
+}
 
 # Просматриваем данные и заносим их в БД
 foreach ($data as $i => $pair) {
@@ -79,7 +82,8 @@ foreach ($data as $i => $pair) {
     $query = 'SELECT *
               FROM sgroup AS g
               WHERE 1 = 1
-                and g.specCode = "' . $specCode . '"'
+                and g.specCode = "' . $specCode . '"
+                and g.shortName = "' . $shortName . '"'
     ;
     
     $result = mysqli_query($link, $query) or die(mysqli_error($link));
@@ -149,7 +153,8 @@ foreach ($data as $i => $pair) {
     # Получаем id Группы
     $query = 'SELECT Id
               FROM sgroup 
-              WHERE specCode = "' . $specCode . '"'
+              WHERE specCode = "' . $specCode . '"
+              and shortName = "' . $shortName . '"'
     ;
     $result = mysqli_query($link, $query) or die(mysqli_error($link));
     for ($data = []; $row = mysqli_fetch_assoc($result); $data[] = $row);
@@ -211,7 +216,9 @@ foreach ($data as $i => $pair) {
                     , subGroup = "'. $subGroup . '"'
         ;
 
+        echo $i;
         mysqli_query($link, $query) or die(mysqli_error($link));
+        echo ' - номана<br>';
     }
 
 }

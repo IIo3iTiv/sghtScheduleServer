@@ -18,6 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             # Читаем data.xlsx и формируем data.json
             require_once '../../scripts/read.php';
+
+            # Загружаем data.json в базу данных
+            require_once '../../scripts/load.php';
             
             # Возвращаемся на главную страницу
             echo '{"status":"success"}';
