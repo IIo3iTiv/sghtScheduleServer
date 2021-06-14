@@ -216,7 +216,9 @@ foreach ($data as $i => $pair) {
                     , subGroup = "'. $subGroup . '"'
         ;
 
+        echo $i;
         mysqli_query($link, $query) or die(mysqli_error($link));
+        echo ' - номана<br>';
     }
 
 }
