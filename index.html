@@ -9,6 +9,7 @@
 </head>
 
 <body>
+
     <div class="container">
         <div class="ball"></div>
         <div class="ball"></div>
@@ -18,60 +19,40 @@
         <div class="ball"></div>
         <div class="ball"></div>
     </div>
-
+    
     <div class="forms">
-
-      <div class="item">
-        <h1>Метод GET</h1>
-        <form action="php/get" method="get">
-          <input class="edt" name="a" type="text" value="2"><br>
-          <input class="edt" name="b" type="text" value="3"><br>
-          <input type="submit" value="Сложить" class="submit">
-        </form>  
-      </div>  
-
-      <div class="item">
-        <h1>Метод POST</h1>
-        <form action="php/post" method="post">
-          <input class="edt" name="a" type="text" value="4"><br>
-          <input class="edt" name="b" type="text" value="5"><br>
-          <input type="submit" value="Сложить" class="submit">
-        </form>  
-      </div>  
-
-      <div class="item">
-        <h1>POST с JSON</h1>
-        <form action="php/json" method="post">
-          <input class="edt" name="a" type="text" value="6"><br>
-          <input class="edt" name="b" type="text" value="7"><br>
-          <input type="submit" value="Сложить" class="submit">
-        </form>  
-      </div> 
-
-      <div class="item">
-        <h1>PHP info</h1>
-        <form action="php/info" method="get">
-          <input type="submit" value="Информация" class="submit">
-        </form>  
-      </div> 
-
-      <div class="item">
-        <h1>Файл</h1>
-        <form action="php/post/upload/" enctype="multipart/form-data" method="post">
+      <div class="items">
+        <form enctype="multipart/form-data" action="http://13.51.203.240/php/api/loadFile/" method="post">
           <input type="file" name="file" id="file" class="inputfile">
-          <label for="file">Выберите файл</label><br><br>
-          <input type="submit" value="Отправить" class="submit">
-        </form>  
+          <label for="file">
+            <span>Выберите файл…</span>
+          </label><br><br>
+          <input type="submit">
+        </form>
       </div>
-      
-      <div class="item">
-        <h1>Файл</h1>
-        <form action="php/scripts/table.php" enctype="multipart/form-data" method="post">
-          <input type="submit" value="Посмотреть" class="submit">
-        </form>  
-      </div> 
-
     </div>
+
+    <script>
+      var inputs = document.querySelectorAll( '.inputfile' );
+    Array.prototype.forEach.call( inputs, function( input ) {
+    var label    = input.nextElementSibling,
+        labelVal = label.innerHTML;
+ 
+    input.addEventListener( 'change', function( e )
+    {
+        var fileName = '';
+        if( this.files && this.files.length > 1 )
+            fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+        else
+            fileName = e.target.value.split( '\\' ).pop();
+ 
+        if( fileName )
+            label.querySelector( 'span' ).innerHTML = fileName;
+        else
+            label.innerHTML = labelVal;
+    });
+    });
+    </script>
 
 </body>
 

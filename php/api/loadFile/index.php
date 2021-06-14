@@ -26,15 +26,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo '{"status":"success"}';
         }
         else {
-            echo '{"status":"error1"}'; # Недопустимое расширение
+            echo '{"status":"error"}'; # Недопустимое расширение
         }
     }
     else {
-        echo '{"status":"error2"}'; # Ошибка при загрузке файла
+        echo '{"status":"error"}'; # Ошибка при загрузке файла
     }
 }
 else {
-    echo '{"status":"error3"}'; # Ошибка при отправке запроса
+    echo '{"status":"error"}'; # Ошибка при отправке запроса
 } 
 
 ?>
